@@ -18,7 +18,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\ProductController::class, 'index'])->name('home');
+//Route::get('/home《web上でのURLの部分, [App\Http\Controllers\ProductController::class, 'showList'《controllerの何処に飛ぶのか])->name('home');
+Route::get('/home', [App\Http\Controllers\ProductController::class, 'showList'])->name('home');
 Route::get('/lists', [App\Http\Controllers\ProductController::class, 'showList'])->name('lists');
 Route::get('/detail/{id}', [App\Http\Controllers\ProductController::class, 'showDetail'])->name('showDetail');
 Route::get('/regist',[App\Http\Controllers\ProductController::class, 'showRegistForm'])->name('regist');

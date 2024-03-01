@@ -12,14 +12,14 @@
             <form action="{{ route('registSubmit') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div id="name-area">
-                    <label for="" class="form-label">商品名</label>
+                    <label for="" class="form-label">商品名 ※</label>
                     <input type="text" name="product_name" value="{{ old('product_name')}}">
                     @if($errors->has('product_name'))
                     <p>{{ $errors->first('product_name') }}</p>
                     @endif
                 </div>
                 <div id="company-area">
-                <label for="" class="form-label">メーカー名</label>
+                <label for="" class="form-label">メーカー名 ※</label>
                 <select name="company_id" id="">
                     <option value="">選択してください</option>
                     @foreach($companies as $company)
@@ -31,14 +31,14 @@
                 @endif
                 </div>
                 <div id="price-area">
-                    <label for="" class="form-label">価格</label>
+                    <label for="" class="form-label">価格 ※</label>
                     <input type="text" name="price" value="{{ old('price')}}">
                     @if($errors->has('price'))
                     <p>{{ $errors->first('price') }}</p>
                     @endif
                 </div>
                 <div id="stock-area">
-                    <label for="" class="form-label">在庫数</label>
+                    <label for="" class="form-label">在庫数 ※</label>
                     <input type="text" name="stock" value="{{ old('stock')}}">
                     @if($errors->has('stock'))
                     <p>{{ $errors->first('stock') }}</p>

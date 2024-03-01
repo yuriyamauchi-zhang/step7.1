@@ -18,7 +18,8 @@
 
                 <div id="img-area">
                     <label for="" class="form-label">商品画像</label>
-                    {{$product->img_path}}
+                    <img src="{{ asset($product->img_path) }}">
+
 
                 </div>
 
@@ -36,7 +37,7 @@
 
                 <div id="price-area">
                     <label for="" class="form-label">価格</label>
-                    {{$product->img_path}}
+                    {{$product->price}}
 
                     
                 </div>

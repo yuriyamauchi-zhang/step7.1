@@ -16,41 +16,38 @@
                 <div class="regist-form">
                     <div id="id-araa">
                         <label for="" class="form-label">ID</label>
+                        {{$product->id}}
                 </div>
 
                 <div id="name-araa">
                     
-                    <label for="" class="form-label">商品名</label>
+                    <label for="" class="form-label">商品名 ※</label>
                     <input type="text" name="product_name" value="{{ $product->product_name }}">
                     @if( $errors->has('product_name'))
                     <p>{{ $errors->first('product_name') }}</p>
                     @endif
                    </div>
-
-
-                <div id="company-area">
-                    <label for="" class="form-label">メーカー名</label>
+                   
+                   <div id="company-area">
+                    <label for="" class="form-label">メーカー名 ※</label>
                     <select name="company_id" id="">
-                    <option value="">選択してください</option>
-                    @foreach($companies as $company)
-                    <option value="{{ $company->id }}"  @if( $company->id === (int)old('company_id')) select @endif>{{ $company->company_name}}</ooption>
-                    @endforeach
-                </select>
-                 @if($errors->has('company_id'))
-                <p>{{ $errors->first('company_id') }}</p>
-                @endif
-                
-            </div>
+                        @foreach($companies as $company)
+                        <option value="{{ $company->id }}" {{ old('company_id', $company->company_name) == $company->id? 'selected' : '' }}> {{ $company->company_name}}
+                    
+                        </option>
+                         @endforeach
+                        </select>
+                    </div>
 
             <div id="price-area">
-                <label for="" class="form-label">価格</label>
+                <label for="" class="form-label">価格 ※</label>
                 <input type="text" name="price" value="{{ $product->price }}">
                 @if( $errors->has('price'))
                 <p>{{ $errors->first('price') }}</p>
                 @endif
             </div>
             <div id="stock-area">
-                 <label for="" class="form-label">在庫</label>
+                 <label for="" class="form-label">在庫 ※</label>
                  <input type="text" name="stock" value="{{ $product->stock }}">
                  @if( $errors->has('stock'))
                  <p>{{ $errors->first('stock') }}</p>
@@ -58,7 +55,7 @@
             </div>
             <div id="comment-area">
                 <label for="" class="form-label">コメント</label>
-                <textarea neme="comment" id="" >{{$product->comment}}</textarea>
+                <textarea name="comment" id="" >{{$product->comment}}</textarea>
                 @if( $errors->has('comment'))
                 <p>{{ $errors->first('comment') }}</p>
                 @endif
@@ -71,7 +68,7 @@
 
             </div>
 
-            <input type="submit" value="登録" class="btn btn-success">
+            <input type="submit" value="更新" class="btn btn-success">
                
             </form>
         </div>

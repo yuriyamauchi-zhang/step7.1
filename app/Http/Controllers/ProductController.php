@@ -79,6 +79,7 @@ class ProductController extends Controller
     //商品編集画面
     public function showEditForm(Request $request,$id){
         $model = New product;
+        $companies = DB::table('companies')->get();
         $product = $model->getProductById($id);
 
         return view ('edit', ['companies' => $companies, 'product' => $product]);

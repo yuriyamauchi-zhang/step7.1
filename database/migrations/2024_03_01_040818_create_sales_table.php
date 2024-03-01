@@ -11,17 +11,6 @@ return new class extends Migration
      *
      * @return void
      */
-
-
-     public function getSalesById($Id){
-        $products=DB::table('sales')
-        ->join('products','sales.product_id', '=', 'products.id')
-        ->select('sales.*', 'products.product_name')
-        ->where('sales.id', '=', $id)
-        ->first();
-     }
-
-
     public function up()
     {
         Schema::create('sales', function (Blueprint $table) {

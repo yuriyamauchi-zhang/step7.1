@@ -74,6 +74,7 @@ public function registEdit($request, $img_path, $id){
         'product_name' => $request->input('product_name'),
         'company_id' => $request->input('company_id'),
         'price' => $request->input('price'),
+        'stock' => $request->input('stock'),
         'comment' => $request->input('comment'),
         'img_path' => $img_path
     ]);
@@ -87,6 +88,7 @@ public function registEditNoImg($request, $id){
         'product_name' => $request->input('product_name'),
         'company_id' => $request->input('company_id'),
         'price' => $request->input('price'),
+        'stock' => $request->input('stock'),
         'comment' => $request->input('comment')
        
     ]);

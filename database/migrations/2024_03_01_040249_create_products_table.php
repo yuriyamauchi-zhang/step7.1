@@ -11,25 +11,6 @@ return new class extends Migration
      *
      * @return void
      */
-
-     
-    //idによる検索
-    public function getProductById($Id){
-        $products=DB::table('products')
-        ->join('companies','products.company_id', '=', 'companies.id')
-        ->select('products.*', 'companies.company_name')
-        ->where('products.id', '=', $id)
-        ->first();
-
-    return $products;
-    }
-
-    //新規登録
-    public function registSubmit($reques, $img_path){
-        
-    }
-
-
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
@@ -42,8 +23,7 @@ return new class extends Migration
             $table->string('img_path')->nullable(true);
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
-
-             });
+        });
     }
 
     /**
@@ -56,4 +36,3 @@ return new class extends Migration
         Schema::dropIfExists('products');
     }
 };
-
