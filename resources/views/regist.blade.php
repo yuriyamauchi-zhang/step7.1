@@ -53,8 +53,13 @@
                 </div>
                 <label for="" class="form-label">商品画像</label>
 	            <input type="file" name="img_path">
+
+                
+                <<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+
                
-                <div>
+                <div class="img_size">
                 <input type="submit" value="登録" class="btn btn-warning">
                 </div>
                 

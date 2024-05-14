@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\http\Requests\ProductRequest;
 use App\Models\product;
 use Illuminate\Support\Facades\DB;
+use Log;
 
 class ProductController extends Controller
 
@@ -14,17 +15,25 @@ class ProductController extends Controller
     public function showList(Request $request){
         $keyword = $request->input('keyword');
         $searchCompany = $request->input('search-company');
-        
+        $min_price = $request -> input('min_price');
+        $max_price = $request -> input('max_price');
+        $min_stock = $request -> input('min_stock');
+        $max_stock = $request -> input('max_stock');
+        $select = $request -> input('select');
+
+
+
+
+
         $model = New product;
-        $products = $model->searchList($keyword, $searchCompany);
+        $products = $model->searchList($keyword, $searchCompany, $min_price, $max_price, $min_stock, $max_stock, $select);
 
         $companies = DB::table('companies')->get();
 
         return view('Lists',['products' => $products, 'companies' => $companies]);
-
+        
     }
-
-    
+ 
     //新規登録
     public function showRegistForm(){
         $companies = DB::table('companies')->get();
@@ -107,19 +116,16 @@ class ProductController extends Controller
         }    
     }
 
-    //削除
-    public function destroy($id)
-    {
-        DB::beginTransaction();
-        try{
-            $model = new product;
-            $model -> destroyProduct($id);
 
-            DB::commit();
-        }catch(Exception $e) {
-            DB::rollBack();
-        }
-    // 削除したら一覧画面にリダイレクト
-        return redirect()->route('lists');
-    }
+
+public function delet(Request $request, $id) {
+    $product = product::findOrFail($id);
+    $product->delete();
+    return redirect()->route('lists');
+}
+
+
+
+
+
 }

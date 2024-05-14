@@ -63,8 +63,9 @@
             
             <div id="img-area">
             <label for="" class="form-label">画像</label>
-            <input type="file" name="img_file"> 
+            <input type="file" name="img_file" > 
             <img src="{{ asset($product->img_path) }}">
+            <link rel="stylesheet" href="/css/style.css" >
 
             </div>
 

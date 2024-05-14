@@ -24,10 +24,19 @@
                             </select>
                         
                     </div>
+
+
+                    <div class="row">
+                           <input type="number" placeholder="在庫下限" name="min_stock" class="form-control search-input col-auto" id=“search-btn”>
+                           <span class="col-auto">~</span>
+                           <input type="number" placeholder="在庫上限" name="max_stock" class="form-control search-input col-auto" id=“search-btn”>
+                    </div>
+
                 </div>
                         <div>
-                         <input type="submit" class=“btn btn-into search-btn” value="検索" id=“search-btn”>
+                         <input type="submit" class="btn btn-into search-btn" value="検索" id=“search-btn”>
                         </div>
+
             </form>
         </div>
     </div>
@@ -36,6 +45,7 @@
                 <!--商品の一覧-->
                 <div id="products-table">
                     <table border="1" class="table table-striped" id="pr-table">
+                                                                   <!--↑idのところをsort.jsに-->
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -53,7 +63,17 @@
                                @foreach ($products as $product)
                                <tr>
                                <td>{{ $product->id }}</td>
-                               <td><img src="{{ asset($product->img_path) }}"></td>
+                              
+                               <td>
+                              <!--altは画像がない時に代わりに表示するもの-->
+                               <img src="{{ asset($product->img_path) }}"  alt=" " class="imgsize" >
+                               
+                               </td>
+
+                    
+
+                       
+
                                <td>{{ $product->product_name }}</td>
                                <td>{{ $product->price }}</td>
                                <td>{{ $product->stock }}</td>
@@ -63,8 +83,13 @@
                                     <form action="{{ route('destroy',['id' => $product->id ])}}" method="POST">
                                     @csrf
                                     @method('delete')
+                                    <!--クラスの所は１つに見えてスペースで区切られているので３つのクラスになっている-->
                                     <input type="submit" class="btn btn-danger delet-btn" value="削除" data-delete-id="{{ $product->id }}"></td>
                                     </form>
+
+                                   
+
+
                               </tr>
                               @endforeach
                             </tbody>

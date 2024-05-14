@@ -14,22 +14,43 @@ class product extends Model
 //データベースの処理の操作
 
 //検索のところ
-public function searchList($keyword, $searchCompany){
+public function searchList($keyword, $searchCompany, $min_price, $max_price, $min_stock, $max_stock, $select){
+    //ID検索
     $query =DB::table('products')
+    //プロダクトのカンパニーIDとカンパニーズのIDを紐付け
     ->join('companies', 'products.company_id', '=', 'companies.id')
+    //プロダクト全部からカンパニーズのカンパニーネームだけ抽出
     ->select('products.*', 'companies.company_name');
 
+    //if文この項目に入力があれば検索される、なければ飛ばされる
+    //キーワード検索、プロダクトにプロダクトネームからlike（曖昧検索）
     if($keyword) {
         $query->where('products.product_name', 'like', "%{$keyword}%");
     }
-
+    //メーカー名検索
     if($searchCompany) {
         $query->where('products.company_id', '=', $searchCompany);
-
+    } 
+    //価格下限
+    if(isset($min_price)) {
+        $query->where('products.price', '>=', $min_price);
+    } 
+    //価格上限
+    if(isset($max_price)) {
+        $query->where('products.price', '<=', $max_price);
+    } 
+    //在庫下限
+    if(isset($select)) {
+        $query->where('products.company_id', '>=', $select);
+    }
+    //在庫上限
+    if(isset($select)) {
+        $query->where('products.company_id', '<=', $select);
     }
 
-    $products = $query->get();
 
+    //$productsから上記$queryの条件に合うデータを取得
+    $products = $query->get();
     return $products;
     
 }
@@ -68,7 +89,7 @@ public function registSubmit($request, $img_path){
 
 //更新、画像あり
 public function registEdit($request, $img_path, $id){
-    DB::table('products')
+    DB::table('products') //←どんな意味だっけ
     ->where('products.id', '=', $id)
     ->update([
         'product_name' => $request->input('product_name'),

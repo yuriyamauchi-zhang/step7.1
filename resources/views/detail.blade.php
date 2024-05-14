@@ -20,6 +20,8 @@
                     <label for="" class="form-label">商品画像</label>
                     <img src="{{ asset($product->img_path) }}">
 
+                    
+                    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
                 </div>
 

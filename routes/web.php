@@ -28,4 +28,8 @@ Route::get('/edit/{id}', [App\Http\Controllers\ProductController::class, 'showEd
 Route::post('/edit/{id}', [App\Http\Controllers\ProductController::class, 'registEdit'])->name('registEdit');
 Route::delete('/product/{id}', [App\Http\Controllers\ProductController::class, 'destroy'])->name('destroy');
 
+//Route::get('/', 'HomeController@index')->name('crud.index'); /* 一覧表示 */
+Route::delete('/delet/{id}', [App\Http\Controllers\ProductController::class, 'delet']); //レコード削除 
+
+
 Auth::routes();
