@@ -40,12 +40,12 @@ public function searchList($keyword, $searchCompany, $min_price, $max_price, $mi
         $query->where('products.price', '<=', $max_price);
     } 
     //在庫下限
-    if(isset($select)) {
-        $query->where('products.company_id', '>=', $select);
+    if(isset($min_stock)) {
+        $query->where('products.stock', '>=', $min_stock);
     }
     //在庫上限
-    if(isset($select)) {
-        $query->where('products.company_id', '<=', $select);
+    if(isset($max_stock)) {
+        $query->where('products.stock', '<=', $max_stock);
     }
 
 
@@ -89,7 +89,7 @@ public function registSubmit($request, $img_path){
 
 //更新、画像あり
 public function registEdit($request, $img_path, $id){
-    DB::table('products') //←どんな意味だっけ
+    DB::table('products') 
     ->where('products.id', '=', $id)
     ->update([
         'product_name' => $request->input('product_name'),
@@ -122,5 +122,19 @@ public function destroyProduct($id){
     ->where('products.id', '=', $id) ->delete();
 }
 
+
+public function decProduct($id)
+{
+    //プロダクトテーブルを操作します
+    $product = DB::table('products')
+    
+    //どのデータを書き換えるか
+    ->where('id', '=', $id)
+    //デクリメント（’何を減らすか’）
+    ->decrement('stock');
+
+return $product;
+
+}
 
 }
