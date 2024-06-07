@@ -14,16 +14,25 @@
                     
                         
                            <input type="text" placeholder='検索キーワード' name='keyword' class="form-control search-input col-auto" width="40%" >
+                           <!--半角スペースを入れたい時、本来は改行の禁止の機能を果たすものらしい,,[&nbsp;ノーブレークスペース]-->
                            <span class="col-auto">&nbsp; &nbsp; </span>
                        
                             <select name="search-company"class="form-control search-input col-auto" width="40%">
                             <option value=""> メーカー名</option>
-                            @foreach($companies as $company)
+                             <!--Bladeテンプレートを使用する為にforeach,endforeachを使用する-->
+                             @foreach($companies as $company)
                             <option value="{{ $company->id }}">{{ $company->company_name}}</option>
                             @endforeach
                             </select>
                         
                     </div>
+
+                    <div class="row">
+                           <input type="number" placeholder="価格下限" name="min_price" class="form-control search-input col-auto" id=“search-btn”>
+                           <span class="col-auto">~</span>
+                           <input type="number" placeholder="価格上限" name="max_price" class="form-control search-input col-auto" id=“search-btn”>
+                    </div>
+
 
 
                     <div class="row">

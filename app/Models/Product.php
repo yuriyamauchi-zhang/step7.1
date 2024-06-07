@@ -17,7 +17,7 @@ class product extends Model
 public function searchList($keyword, $searchCompany, $min_price, $max_price, $min_stock, $max_stock, $select){
     //ID検索
     $query =DB::table('products')
-    //プロダクトのカンパニーIDとカンパニーズのIDを紐付け
+    //(companiesと紐付けます,紐付けるのはプロダクトのカンパニーID,と,カンパニーズのID)
     ->join('companies', 'products.company_id', '=', 'companies.id')
     //プロダクト全部からカンパニーズのカンパニーネームだけ抽出
     ->select('products.*', 'companies.company_name');
@@ -32,6 +32,7 @@ public function searchList($keyword, $searchCompany, $min_price, $max_price, $mi
         $query->where('products.company_id', '=', $searchCompany);
     } 
     //価格下限
+    //isset.これは変数が宣言されており,null とは異なる値だということ,セットで考えてとのこと、、
     if(isset($min_price)) {
         $query->where('products.price', '>=', $min_price);
     } 
@@ -65,6 +66,7 @@ public function getProductById($id){
     ->select('products.*', 'companies.company_name')
     //プロダクトテーブルから商品のIDを検索
     ->where('products.id', '=', $id)
+    //最終的に表示させる
     ->first();
 
     return $products;
@@ -72,6 +74,7 @@ public function getProductById($id){
 
 //新規
 public function registSubmit($request, $img_path){
+    // Step５でやってる
     DB::table('products')->insert([
         'product_name'=> $request->input('product_name'),
         'company_id'=> $request->input('company_id'),
